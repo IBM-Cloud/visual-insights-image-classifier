@@ -2,7 +2,7 @@ var classifyBtn = document.getElementById("classifybtn");
 function classifyImageWithTensorflow() {
     const img = document.getElementById('uploadedimage');
     var modalDlg = document.getElementById('modal');
-    var table = document.getElementById("table");
+    var table = document.getElementById('table').getElementsByTagName('tbody')[0];
     // Load the model.
     mobilenet.load().then(model => {
         // Classify the image.
