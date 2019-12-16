@@ -1,0 +1,15 @@
+{
+  "name": "powerai-image-classification",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run"
+  },
+  "keywords": [],
+  "author": "Vidyasagar Machupalli",
+  "license": "ISC",
+  "devDependencies": {
+    "bulma": "^0.8.0"
+  }
+}
