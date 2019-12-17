@@ -3,6 +3,7 @@ function classifyImageWithTensorflow() {
     const img = document.getElementById('uploadedimage');
     var modalDlg = document.getElementById('modal');
     var table = document.getElementById('table').getElementsByTagName('tbody')[0];
+    classifyBtn.classList.add("is-loading");
     // Load the model.
     mobilenet.load().then(model => {
         // Classify the image.
@@ -21,6 +22,7 @@ function classifyImageWithTensorflow() {
                 table.appendChild(tr);
             }
             modalDlg.classList.add('is-active');
+            classifyBtn.classList.remove("is-loading");
         });
     });
     classifyBtn.setAttribute("disabled", "");
