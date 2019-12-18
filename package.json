@@ -2,7 +2,7 @@
   "name": "powerai-image-classification",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "npm run"
   },
@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "bulma": "^0.8.0"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }

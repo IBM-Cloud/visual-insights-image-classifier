@@ -70,9 +70,10 @@
                     <input
                       class="file-input"
                       type="file"
+                      id="file"
                       name="imgupload"
                       accept="image/*"
-                      onchange="showUploadedImage(this)"
+                      oninput="showUploadedImage(this);"
                     />
                     <span class="file-cta">
                       <span class="file-icon">
@@ -153,6 +154,6 @@
         </div>
       </div>
     </section>
-    <script src="index.js"></script>
+    <script src="./index.js" type="text/javascript"></script>
   </body>
 </html>
