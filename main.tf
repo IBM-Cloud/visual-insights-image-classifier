@@ -152,7 +152,8 @@ resource "null_resource" "provisioners" {
       "apt -y install -y npm",
       "cd /tmp/app/",
       "npm install",
-      "node app.js"
+      "sudo npm install pm2 -g",
+      "pm2 start app.js"
     ]
   }
 }
