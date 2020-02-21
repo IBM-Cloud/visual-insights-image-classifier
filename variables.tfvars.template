@@ -1,0 +1,5 @@
+vpc_id = ""
+resource_group_name = ""
+ssh_key_name = ""
+ibmcloud_api_key = ""
+ssh_private_key_file_path="~/.ssh/id_rsa"
