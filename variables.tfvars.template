@@ -1,5 +1,9 @@
+# ID of VPC created with PowerAI vision trial backend
+# Run this command: ibmcloud is vpcs 
 vpc_id = ""
 resource_group_name = ""
 ssh_key_name = ""
+# Use the same key used with PowerAI vision trial backend
 ibmcloud_api_key = ""
+# Path to the SSH private key on your computer
 ssh_private_key_file_path="~/.ssh/id_rsa"
