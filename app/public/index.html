@@ -67,20 +67,21 @@
                   class="file is-centered is-boxed is-info"
                 >
                   <label class="file-label">
+                    <form action="/uploadpic" method="POST" enctype="multipart/form-data" id="imageForm">
                     <input
                       class="file-input"
                       type="file"
                       id="file"
-                      name="imgupload"
-                      accept="image/*"
-                      oninput="showUploadedImage(this);"
+                      name="files"
+                      accept="image/jpeg"
                     />
+                    </form>
                     <span class="file-cta">
                       <span class="file-icon">
                         <i class="fas fa-upload"></i>
                       </span>
                       <span class="file-label">
-                        Upload an image
+                        Upload a JPEG image
                       </span>
                     </span>
                     <span class="file-name">
@@ -90,16 +91,14 @@
                 </div>
               </div>
               <div class="field">
-                <p class="has-text-centered">
-                  <a
+                  <input class="button"
                     class="button is-medium is-info is-outlined"
                     id="classifybtn"
                     disabled
-                    onclick="classifyImageWithTensorflow()"
+                    type="submit"
+                    form="imageForm"
+                    value="Classify image"
                   >
-                    Classify
-                  </a>
-                </p>
                 <div id="modal" class="modal">
                   <div class="modal-background"></div>
                   <div class="modal-card">
@@ -154,6 +153,8 @@
         </div>
       </div>
     </section>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
     <script src="./index.js" type="text/javascript"></script>
   </body>
 </html>

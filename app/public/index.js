@@ -1,3 +1,25 @@
+$(document).ready(function() {
+     $("#file").change(function () {
+    showUploadedImage(this);
+});
+     $('#imageForm').submit(function() {
+        $(this).ajaxSubmit({
+
+            error: function(xhr) {
+        status('Error: ' + xhr.status);
+            },
+
+            success: function(response) {
+                 console.log(response);  
+       
+            }
+    });
+        //Very important line, it disable the page refresh.
+    return false;
+    });    
+});
+
+
 var classifyBtn = document.getElementById("classifybtn");
 function classifyImageWithTensorflow() {
     const img = document.getElementById('uploadedimage');
@@ -57,3 +79,5 @@ function showUploadedImage(fileInput) {
         }
     }
 }
+
+  
