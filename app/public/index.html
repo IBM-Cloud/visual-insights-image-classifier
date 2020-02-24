@@ -67,7 +67,7 @@
                   class="file is-centered is-boxed is-info"
                 >
                   <label class="file-label">
-                    <form action="/uploadpic" method="POST" enctype="multipart/form-data" id="imageForm">
+                    <form action="/uploadimage" method="POST" enctype="multipart/form-data" id="imageForm">
                     <input
                       class="file-input"
                       type="file"
@@ -91,14 +91,13 @@
                 </div>
               </div>
               <div class="field">
-                  <input class="button"
+                  <button 
                     class="button is-medium is-info is-outlined"
                     id="classifybtn"
                     disabled
                     type="submit"
                     form="imageForm"
-                    value="Classify image"
-                  >
+                  >Classify image</button>
                 <div id="modal" class="modal">
                   <div class="modal-background"></div>
                   <div class="modal-card">

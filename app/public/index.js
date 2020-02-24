@@ -1,17 +1,28 @@
 $(document).ready(function() {
+    $("#classifybtn").attr("disabled", true);
      $("#file").change(function () {
     showUploadedImage(this);
 });
      $('#imageForm').submit(function() {
+      $("#classifybtn").addClass("is-loading");
+      $("#table tbody tr").remove(); 
         $(this).ajaxSubmit({
-
             error: function(xhr) {
         status('Error: ' + xhr.status);
             },
-
             success: function(response) {
+                $("#classifybtn").removeClass("is-loading");
+                $("#classifybtn").attr("disabled", true);
                  console.log(response);  
-       
+                 var parsedJSON = JSON.parse(response.data);
+                 console.log(parsedJSON.classified);
+                 var classifiedCategory = Object.keys(parsedJSON.classified)[0] == "_negative_" ? "Uncategorized" : Object.keys(parsedJSON.classified)[0]; 
+                 var confidence = parseFloat(Object.values(parsedJSON.classified)[0]);
+                 $("#table tbody").append("<tr><td>"+classifiedCategory+"</td><td>"+(confidence*100).toFixed(2)+" %</td></tr>");
+                 $("#modal").addClass("is-active");
+                 $('#modal-close').on('click', function() {
+                   $("#modal").removeClass("is-active");
+    });
             }
     });
         //Very important line, it disable the page refresh.
@@ -19,7 +30,7 @@ $(document).ready(function() {
     });    
 });
 
-
+//TODO: Remove 
 var classifyBtn = document.getElementById("classifybtn");
 function classifyImageWithTensorflow() {
     const img = document.getElementById('uploadedimage');
