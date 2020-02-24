@@ -147,9 +147,9 @@ resource "null_resource" "provisioners" {
   provisioner "remote-exec" {
     inline = [
       "export DEBIAN_FRONTEND=noninteractive",
-      "apt update && apt upgrade",
+      "apt -y update && apt -y upgrade",
       "apt -y install nodejs",
-      "apt -y install -y npm",
+      "apt -y install npm",
       "cd /tmp/app/",
       "npm install",
       "sudo npm install pm2 -g",
