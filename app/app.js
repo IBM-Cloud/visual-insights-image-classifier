@@ -9,13 +9,13 @@ require('dotenv').config({
 
 const port = 3000
 const MISSING_ENV =
-  'Missing required runtime environment variable POWERAI_VISION_WEB_API_URL';
+  'Missing required runtime environment variable POWERAI_VISION_API_URL';
 
-const poweraiVisionWebApiUrl = process.env.POWERAI_VISION_WEB_API_URL;
+const poweraiVisionApiUrl = process.env.POWERAI_VISION_API_URL;
 
-console.log('Web API URL: ' + poweraiVisionWebApiUrl);
+console.log('Web API URL: ' + poweraiVisionApiUrl);
 
-if (!poweraiVisionWebApiUrl) {
+if (!poweraiVisionApiUrl) {
   console.log(MISSING_ENV);
 }
 
@@ -32,12 +32,12 @@ app.get('/', (req, res) => {
 * Upload an image for classification
 */
 app.post('/uploadimage', function(req, res) {
-  if (!poweraiVisionWebApiUrl) {
+  if (!poweraiVisionApiUrl) {
     console.log(MISSING_ENV);
     res.send({data: JSON.stringify({error: MISSING_ENV})});
   } else {
     req.pipe(request.post({
-      url: poweraiVisionWebApiUrl,
+      url: poweraiVisionApiUrl,
       gzip: true,
       agentOptions: {
         rejectUnauthorized: false,

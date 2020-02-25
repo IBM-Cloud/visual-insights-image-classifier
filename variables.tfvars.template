@@ -7,3 +7,4 @@ ssh_key_name = ""
 ibmcloud_api_key = ""
 # Path to the SSH private key on your computer
 ssh_private_key_file_path="~/.ssh/id_rsa"
+powerai_vision_api_url=""

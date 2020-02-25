@@ -147,6 +147,7 @@ resource "null_resource" "provisioners" {
   provisioner "remote-exec" {
     inline = [
       "export DEBIAN_FRONTEND=noninteractive",
+      "export POWERAI_VISION_API_URL=${var.powerai_vision_api_url}",
       "apt -y update && apt -y upgrade",
       "apt -y install nodejs",
       "apt -y install npm",

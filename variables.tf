@@ -35,3 +35,7 @@ variable "basename" {
 variable "ssh_private_key_file_path" {
   description = "Path to the SSH private key file on your local computer E.g., ~/.ssh/id_rsa"
 }
+
+variable "powerai_vision_api_url" {
+  description = "The URL of backend PowerAI vision trial API"
+}
