@@ -67,14 +67,19 @@
                   class="file is-centered is-boxed is-info"
                 >
                   <label class="file-label">
-                    <form action="/uploadimage" method="POST" enctype="multipart/form-data" id="imageForm">
-                    <input
-                      class="file-input"
-                      type="file"
-                      id="file"
-                      name="files"
-                      accept="image/jpeg"
-                    />
+                    <form
+                      action="/uploadimage"
+                      method="POST"
+                      enctype="multipart/form-data"
+                      id="imageForm"
+                    >
+                      <input
+                        class="file-input"
+                        type="file"
+                        id="file"
+                        name="files"
+                        accept="image/jpeg"
+                      />
                     </form>
                     <span class="file-cta">
                       <span class="file-icon">
@@ -91,13 +96,18 @@
                 </div>
               </div>
               <div class="field">
-                  <button 
-                    class="button is-medium is-info is-outlined"
-                    id="classifybtn"
-                    disabled
-                    type="submit"
-                    form="imageForm"
-                  >Classify image</button>
+                <button
+                  class="button is-medium is-info is-outlined"
+                  id="classifybtn"
+                  disabled
+                  type="submit"
+                  form="imageForm"
+                >
+                  Classify image
+                </button>
+                <div class="content">
+                  <p class="error has-text-danger is-medium"></p>
+                </div>
                 <div id="modal" class="modal">
                   <div class="modal-background"></div>
                   <div class="modal-card">
