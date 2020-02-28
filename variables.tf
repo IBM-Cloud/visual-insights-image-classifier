@@ -5,6 +5,7 @@ variable "ssh_key_name" {
 }
 
 variable "resource_group_name" {
+  default = "default"
 }
 
 variable "vpc_id" {
