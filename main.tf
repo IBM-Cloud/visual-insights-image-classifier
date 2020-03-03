@@ -107,7 +107,7 @@ data "ibm_is_ssh_key" "ssh_key" {
 }
 
 data "ibm_is_image" "ubuntu" {
-  name = "ibm-ubuntu-18-04-1-minimal-amd64-1"
+  name = "${var.image_name}"
 }
 
 resource "ibm_is_instance" "frontend_vsi" {
@@ -115,19 +115,19 @@ resource "ibm_is_instance" "frontend_vsi" {
   vpc            = "${var.vpc_id}"
   zone           = "${var.zone}"
   keys           = ["${data.ibm_is_ssh_key.ssh_key.id}"]
-  image          = "${data.ibm_is_image.admin_image_name.id}"
-  profile        = "cx2-2x4"
+  image          = "${data.ibm_is_image.ubuntu.id}"
+  profile        = "${var.profile_name}"
   resource_group = "${data.ibm_resource_group.group.id}"
 
   primary_network_interface = {
-    subnet          = "${element(ibm_is_subnet.sub_admin.id, count.index)}"
+    subnet          = "${ibm_is_subnet.frontend_subnet.id}"
     security_groups = ["${ibm_is_security_group.frontend_sg.id}"]
   }
 }
 
 resource "ibm_is_floating_ip" "frontend_fip" {
   name   = "${var.basename}-frontend-fip"
-  target = "${ibm_is_instance.vpc_vsi_admin.primary_network_interface.0.id}"
+  target = "${ibm_is_instance.frontend_vsi.primary_network_interface.0.id}"
 }
 
 resource "null_resource" "provisioners" {

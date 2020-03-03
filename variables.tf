@@ -6,13 +6,21 @@ variable "ssh_key_name" {
   description = "Name of your SSH key created under VPC"
 }
 
+variable "vpc_id" {
+  description = "Retrieve the VPC ID by running the command - ibmcloud is vpcs"
+}
+
+variable "ssh_private_key_file_path" {
+  description = "Path to the SSH private key file on your local computer e.g., ~/.ssh/id_rsa"
+}
+
+variable "powerai_vision_api_url" {
+  description = "The URL of backend PowerAI vision trial API"
+}
+
 variable "resource_group_name" {
   description = "Name of the resource group to provision the resources"
   default = "default"
-}
-
-variable "vpc_id" {
-  description = "Retrieve the VPC ID by running the command - ibmcloud is vpcs"
 }
 
 variable "generation" {
@@ -40,10 +48,12 @@ variable "basename" {
   default     = "powerai-vision"
 }
 
-variable "ssh_private_key_file_path" {
-  description = "Path to the SSH private key file on your local computer e.g., ~/.ssh/id_rsa"
+variable "image_name"{
+  description = "Name of the base image for the virtual server (should be an Ubuntu 18.04 base)"
+  default = "ibm-ubuntu-18-04-1-minimal-amd64-1"
 }
 
-variable "powerai_vision_api_url" {
-  description = "The URL of backend PowerAI vision trial API"
+variable "profile_name"{
+  description = "Name of the instance profile"
+  default = "cx2-2x4"
 }
