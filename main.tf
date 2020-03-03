@@ -9,6 +9,10 @@ data "ibm_resource_group" "group" {
   name = "${var.resource_group_name}"
 }
 
+data "ibm_is_image" "ubuntu" {
+  name = "${var.image_name}"
+}
+
 resource "ibm_is_security_group" "frontend_sg" {
   name           = "${var.basename}-frontend"
   vpc            = "${"${var.vpc_id}"}"
@@ -102,12 +106,9 @@ resource "ibm_is_subnet" "frontend_subnet" {
   total_ipv4_address_count = 256
 }
 
-data "ibm_is_ssh_key" "ssh_key" {
-  name = "${var.ssh_key_name}"
-}
-
-data "ibm_is_image" "ubuntu" {
-  name = "${var.image_name}"
+resource "ibm_is_ssh_key" "public_key" {
+  name = "${var.basename}-public-key"
+  public_key = "${tls_private_key.frontend_keypair.public_key_openssh}"
 }
 
 resource "ibm_is_instance" "frontend_vsi" {
@@ -125,6 +126,11 @@ resource "ibm_is_instance" "frontend_vsi" {
   }
 }
 
+resource "tls_private_key" "frontend_keypair" {
+  algorithm = "RSA"
+  rsa_bits = "2048"
+}
+
 resource "ibm_is_floating_ip" "frontend_fip" {
   name   = "${var.basename}-frontend-fip"
   target = "${ibm_is_instance.frontend_vsi.primary_network_interface.0.id}"
@@ -136,7 +142,7 @@ resource "null_resource" "provisioners" {
     user    = "root"
     timeout = "2m"
     host    = "${ibm_is_floating_ip.frontend_fip.0.address}"
-    private_key = "${file("${var.ssh_private_key_file_path}")}"
+    private_key = "${tls_private_key.frontend_keypair.private_key_pem}"
   }
 
   provisioner "file" {
