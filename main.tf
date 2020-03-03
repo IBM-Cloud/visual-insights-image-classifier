@@ -115,7 +115,7 @@ resource "ibm_is_instance" "frontend_vsi" {
   name           = "${var.basename}-frontend-vsi"
   vpc            = "${var.vpc_id}"
   zone           = "${var.zone}"
-  keys           = ["${data.ibm_is_ssh_key.public_key.id}"]
+  keys           = ["${ibm_is_ssh_key.public_key.id}"]
   image          = "${data.ibm_is_image.ubuntu.id}"
   profile        = "${var.profile_name}"
   resource_group = "${data.ibm_resource_group.group.id}"
