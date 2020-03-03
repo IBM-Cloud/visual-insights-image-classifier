@@ -1,17 +1,22 @@
 variable "ibmcloud_api_key" {
+  description = "Enter the IBM Cloud API key. Use the same API key used with PowerAI vision trial backend"
 }
 
 variable "ssh_key_name" {
+  description = "Name of your SSH key created under VPC"
 }
 
 variable "resource_group_name" {
+  description = "Name of the resource group to provision the resources"
   default = "default"
 }
 
 variable "vpc_id" {
+  description = "Retrieve the VPC ID by running the command - ibmcloud is vpcs"
 }
 
 variable "generation" {
+  description = "VPC generation to provision the resources"
   default = "2"
 }
 
@@ -21,10 +26,12 @@ variable "ibmcloud_timeout" {
 }
 
 variable "region" {
+  description = "Should be same as the PowerAI vision region"
   default = "us-south"
 }
 
 variable "zone" {
+  description = "Should be same as the PowerAI vision zone"
   default = "us-south-1"
 }
 
@@ -34,7 +41,7 @@ variable "basename" {
 }
 
 variable "ssh_private_key_file_path" {
-  description = "Path to the SSH private key file on your local computer E.g., ~/.ssh/id_rsa"
+  description = "Path to the SSH private key file on your local computer e.g., ~/.ssh/id_rsa"
 }
 
 variable "powerai_vision_api_url" {
