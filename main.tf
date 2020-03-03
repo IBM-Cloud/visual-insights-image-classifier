@@ -21,7 +21,7 @@ resource "ibm_is_security_group_rule" "ingress_ssh_all" {
   direction = "inbound"
   remote    = "0.0.0.0/0" # TOO OPEN for production
 
-  tcp =  {
+  tcp = {
     port_min = 22
     port_max = 22
   }
@@ -32,7 +32,7 @@ resource "ibm_is_security_group_rule" "frontend_ingress_80_all" {
   direction = "inbound"
   remote    = "0.0.0.0/0"
 
-  tcp =  {
+  tcp = {
     port_min = 80
     port_max = 80
   }
@@ -44,7 +44,7 @@ resource "ibm_is_security_group_rule" "frontend_ingress_3000_node" {
   direction = "inbound"
   remote    = "0.0.0.0/0"
 
-  tcp =  {
+  tcp = {
     port_min = 3000
     port_max = 3000
   }
@@ -56,7 +56,7 @@ resource "ibm_is_security_group_rule" "maintenance_egress_443" {
   direction = "outbound"
   remote    = "0.0.0.0/0"
 
-  tcp =  {
+  tcp = {
     port_min = "443"
     port_max = "443"
   }
@@ -67,7 +67,7 @@ resource "ibm_is_security_group_rule" "maintenance_egress_80" {
   direction = "outbound"
   remote    = "0.0.0.0/0"
 
-  tcp =  {
+  tcp = {
     port_min = 80
     port_max = 80
   }
@@ -89,7 +89,7 @@ resource "ibm_is_security_group_rule" "maintenance_egress_udp_53" {
   direction = "outbound"
   remote    = "0.0.0.0/0"
 
-  udp {
+  udp = {
     port_min = 53
     port_max = 53
   }
@@ -119,7 +119,7 @@ resource "ibm_is_instance" "frontend_vsi" {
   profile        = "cx2-2x4"
   resource_group = "${data.ibm_resource_group.group.id}"
 
-  primary_network_interface {
+  primary_network_interface = {
     subnet          = "${element(ibm_is_subnet.sub_admin.id, count.index)}"
     security_groups = ["${ibm_is_security_group.frontend_sg.id}"]
   }
@@ -128,6 +128,7 @@ resource "ibm_is_instance" "frontend_vsi" {
 resource "ibm_is_floating_ip" "frontend_fip" {
   name   = "${var.basename}-frontend-fip"
   target = "${ibm_is_instance.vpc_vsi_admin.primary_network_interface.0.id}"
+}
 
 resource "null_resource" "provisioners" {
   connection {
@@ -165,4 +166,3 @@ output "access" {
 output "sshcommand" {
   value = "ssh root@${ibm_is_floating_ip.frontend_fip.address}"
 }
-
