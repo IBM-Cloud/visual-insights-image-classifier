@@ -12,12 +12,7 @@ variable "powerai_vision_api_url" {
 
 variable "resource_group_name" {
   description = "Name of the resource group to provision the resources"
-  default = "default"
-}
-
-variable "generation" {
-  description = "VPC generation to provision the resources"
-  default = "2"
+  default = "Default"
 }
 
 variable "ibmcloud_timeout" {
@@ -36,8 +31,8 @@ variable "zone" {
 }
 
 variable "basename" {
-  description = "Name for the VPC to create and prefix to use for all other resources."
-  default     = "powerai-vision"
+  description = "prefix for all the VPC resources created for frontend web app"
+  default     = "powerai-vision-ui"
 }
 
 variable "image_name" {
