@@ -7,7 +7,7 @@ variable "vpc_id" {
 }
 
 variable "powerai_vision_api_url" {
-  description = "The URL of backend PowerAI vision trial API"
+  description = "The API URL of backend PowerAI vision trial"
 }
 
 variable "resource_group_name" {
