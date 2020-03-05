@@ -8,6 +8,7 @@ $(document).ready(function() {
     $("#classifybtn").addClass("is-loading");
     $("#table tbody tr").remove();
     $(this).ajaxSubmit({
+      data: { clsnum: "5", confthre: "0.1" },
       error: function(xhr) {
         $("p.error").text(xhr.status);
       },
@@ -16,20 +17,25 @@ $(document).ready(function() {
         $("#classifybtn").attr("disabled", true);
         console.log(response);
         var parsedJSON = JSON.parse(response.data);
-        if (parsedJSON.result == "success") {
+        if (parsedJSON.result == "success" && Boolean(parsedJSON.classified)) {
           console.log(parsedJSON.classified);
-          var classifiedCategory =
-            Object.keys(parsedJSON.classified)[0] == "_negative_"
-              ? "Uncategorized"
-              : Object.keys(parsedJSON.classified)[0];
-          var confidence = parseFloat(Object.values(parsedJSON.classified)[0]);
-          $("#table tbody").append(
-            "<tr><td>" +
-              classifiedCategory +
-              "</td><td>" +
-              (confidence * 100).toFixed(2) +
-              " %</td></tr>"
-          );
+          var sortedArray = Object.entries(parsedJSON.classified).sort();
+          var sortedResponseObject = Object.fromEntries(sortedArray);
+          console.log();
+          for (i = 0; i < Object.keys(sortedResponseObject).length; i++) {
+            var classifiedCategory =
+              Object.keys(sortedResponseObject)[i] == "_negative_"
+                ? "Uncategorized"
+                : Object.keys(sortedResponseObject)[i];
+            var confidence = parseFloat(Object.values(sortedResponseObject)[i]);
+            $("#table tbody").append(
+              "<tr><td>" +
+                classifiedCategory +
+                "</td><td>" +
+                (confidence * 100).toFixed(2) +
+                " %</td></tr>"
+            );
+          }
           $("#modal").addClass("is-active");
           $("#modal-close").on("click", function() {
             $("#modal").removeClass("is-active");
@@ -45,42 +51,7 @@ $(document).ready(function() {
   });
 });
 
-//TODO: Remove
-var classifyBtn = document.getElementById("classifybtn");
-function classifyImageWithTensorflow() {
-  const img = document.getElementById("uploadedimage");
-  var modalDlg = document.getElementById("modal");
-  var table = document.getElementById("table").getElementsByTagName("tbody")[0];
-  classifyBtn.classList.add("is-loading");
-  // Load the model.
-  mobilenet.load().then(model => {
-    // Classify the image.
-    model.classify(img).then(predictions => {
-      console.log("Predictions: ");
-      console.log(predictions);
-      table.innerHTML = "";
-      for (var i = 0; i < predictions.length; i++) {
-        var tr = document.createElement("tr");
-        var category = predictions[i]["className"];
-        var confidence = predictions[i]["probability"].toFixed(5);
-        var tdCategory = tr.appendChild(document.createElement("td"));
-        tdCategory.innerHTML = category;
-        var tdConfidence = tr.appendChild(document.createElement("td"));
-        tdConfidence.innerHTML = confidence;
-        table.appendChild(tr);
-      }
-      modalDlg.classList.add("is-active");
-      classifyBtn.classList.remove("is-loading");
-    });
-  });
-  classifyBtn.setAttribute("disabled", "");
-  modal.removeAttribute("is-active");
-  var imageModalCloseBtn = document.querySelector("#modal-close");
-  imageModalCloseBtn.addEventListener("click", function() {
-    modalDlg.classList.remove("is-active");
-  });
-}
-
+// Shows the preview of uploaded image
 function showUploadedImage(fileInput) {
   var files = fileInput.files;
   if (files.length > 0) {
