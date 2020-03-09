@@ -3,6 +3,7 @@ $(document).ready(function() {
   $("#classifybtn").attr("disabled", true);
   $("#file").change(function() {
     showUploadedImage(this);
+    $("#classifybtn").removeAttr("disabled");
   });
   $("#imageForm").submit(function() {
     $("#classifybtn").addClass("is-loading");
@@ -19,9 +20,8 @@ $(document).ready(function() {
         var parsedJSON = JSON.parse(response.data);
         if (parsedJSON.result == "success" && Boolean(parsedJSON.classified)) {
           console.log(parsedJSON.classified);
-          var sortedArray = Object.entries(parsedJSON.classified).sort();
+          var sortedArray = Object.entries(parsedJSON.classified).sort((a, b) => b[1]-a[1]);;
           var sortedResponseObject = Object.fromEntries(sortedArray);
-          console.log();
           for (i = 0; i < Object.keys(sortedResponseObject).length; i++) {
             var classifiedCategory =
               Object.keys(sortedResponseObject)[i] == "_negative_"
@@ -70,7 +70,6 @@ function showUploadedImage(fileInput) {
       reader.onload = (function(aImg) {
         return function(e) {
           aImg.src = e.target.result;
-          classifyBtn.removeAttribute("disabled");
         };
       })(img);
       reader.readAsDataURL(file);
