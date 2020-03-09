@@ -53,6 +53,7 @@ $(document).ready(function() {
 
 // Shows the preview of uploaded image
 function showUploadedImage(fileInput) {
+  var classifyBtn = document.getElementById("classifybtn");
   var files = fileInput.files;
   if (files.length > 0) {
     for (var i = 0; i < files.length; i++) {
