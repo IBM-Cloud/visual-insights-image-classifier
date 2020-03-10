@@ -1,13 +1,13 @@
 variable "ibmcloud_api_key" {
-  description = "Enter the IBM Cloud API key. Use the same API key used with PowerAI vision trial backend"
+  description = "Enter the IBM Cloud API key. Use the same API key used with Visual Insights backend"
 }
 
 variable "vpc_id" {
-  description = "Retrieve the VPC ID by running the command - ibmcloud is vpcs"
+  description = "Target VPC gen 2 with this command - ibmcloud is target --gen 2 and retrieve the VPC ID - ibmcloud is vpcs"
 }
 
-variable "powerai_vision_api_url" {
-  description = "The API URL of backend PowerAI vision trial"
+variable "visual_insights_model_api_url" {
+  description = "The API URL of backend Visual Insights "
 }
 
 variable "resource_group_name" {
@@ -21,18 +21,18 @@ variable "ibmcloud_timeout" {
 }
 
 variable "region" {
-  description = "Should be same as the PowerAI vision region"
+  description = "Should be same as the Visual Insights region"
   default = "us-south"
 }
 
 variable "zone" {
-  description = "Should be same as the PowerAI vision zone"
+  description = "Should be same as the Visual Insights zone"
   default = "us-south-1"
 }
 
 variable "basename" {
   description = "prefix for all the VPC resources created for frontend web app"
-  default     = "powerai-vision-ui"
+  default     = "visual-insights-ui"
 }
 
 variable "image_name" {

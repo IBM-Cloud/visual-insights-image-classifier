@@ -153,7 +153,7 @@ resource "null_resource" "provisioners" {
   provisioner "remote-exec" {
     inline = [
       "export DEBIAN_FRONTEND=noninteractive",
-      "export POWERAI_VISION_API_URL=${var.powerai_vision_api_url}",
+      "export VISUAL_INSIGHTS_MODEL_API_URL=${var.visual_insights_model_api_url}",
       "apt -y update && apt -y upgrade",
       "apt -y install nodejs",
       "apt -y install npm",
@@ -167,8 +167,4 @@ resource "null_resource" "provisioners" {
 
 output "access" {
   value =" Access your application at http://${ibm_is_floating_ip.frontend_fip.address}:3000"
-}
-
-output "sshcommand" {
-  value = "ssh root@${ibm_is_floating_ip.frontend_fip.address}"
 }
