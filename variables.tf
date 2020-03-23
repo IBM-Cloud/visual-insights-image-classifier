@@ -11,7 +11,7 @@ variable "visual_insights_model_api_url" {
 }
 
 variable "resource_group_name" {
-  description = "Name of the resource group to provision the resources"
+  description = "Name of the resource group to provision the resources. For resource group name, Run this command - ibmcloud resource groups"
   default = "Default"
 }
 

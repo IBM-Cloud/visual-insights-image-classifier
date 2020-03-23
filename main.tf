@@ -104,11 +104,13 @@ resource "ibm_is_subnet" "frontend_subnet" {
   vpc                      = "${var.vpc_id}"
   zone                     = "${var.zone}"
   total_ipv4_address_count = 256
+  resource_group           = "${data.ibm_resource_group.group.id}"
 }
 
 resource "ibm_is_ssh_key" "public_key" {
-  name = "${var.basename}-public-key"
-  public_key = "${tls_private_key.frontend_keypair.public_key_openssh}"
+  name           = "${var.basename}-public-key"
+  public_key     = "${tls_private_key.frontend_keypair.public_key_openssh}"
+  resource_group = "${data.ibm_resource_group.group.id}"
 }
 
 resource "ibm_is_instance" "frontend_vsi" {
@@ -132,8 +134,9 @@ resource "tls_private_key" "frontend_keypair" {
 }
 
 resource "ibm_is_floating_ip" "frontend_fip" {
-  name   = "${var.basename}-frontend-fip"
-  target = "${ibm_is_instance.frontend_vsi.primary_network_interface.0.id}"
+  name           = "${var.basename}-frontend-fip"
+  target         = "${ibm_is_instance.frontend_vsi.primary_network_interface.0.id}"
+  resource_group = "${data.ibm_resource_group.group.id}"
 }
 
 resource "null_resource" "provisioners" {
