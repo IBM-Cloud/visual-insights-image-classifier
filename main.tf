@@ -5,9 +5,9 @@ provider "ibm" {
   ibmcloud_timeout = "${var.ibmcloud_timeout}"
 }
 
-data "ibm_resource_group" "group" {
+/*data "ibm_resource_group" "group" {
   name = "${var.resource_group_name}"
-}
+}*/
 
 data "ibm_is_image" "ubuntu" {
   name = "${var.image_name}"
@@ -16,7 +16,7 @@ data "ibm_is_image" "ubuntu" {
 resource "ibm_is_security_group" "frontend_sg" {
   name           = "${var.basename}-frontend"
   vpc            = "${"${var.vpc_id}"}"
-  resource_group = "${data.ibm_resource_group.group.id}"
+  //resource_group = "${data.ibm_resource_group.group.id}"
 }
 
 # allow ssh access to this instance from outside
@@ -104,13 +104,13 @@ resource "ibm_is_subnet" "frontend_subnet" {
   vpc                      = "${var.vpc_id}"
   zone                     = "${var.zone}"
   total_ipv4_address_count = 256
-  resource_group           = "${data.ibm_resource_group.group.id}"
+  //resource_group           = "${data.ibm_resource_group.group.id}"
 }
 
 resource "ibm_is_ssh_key" "public_key" {
   name           = "${var.basename}-public-key"
   public_key     = "${tls_private_key.frontend_keypair.public_key_openssh}"
-  resource_group = "${data.ibm_resource_group.group.id}"
+  //resource_group = "${data.ibm_resource_group.group.id}"
 }
 
 resource "ibm_is_instance" "frontend_vsi" {
@@ -120,7 +120,7 @@ resource "ibm_is_instance" "frontend_vsi" {
   keys           = ["${ibm_is_ssh_key.public_key.id}"]
   image          = "${data.ibm_is_image.ubuntu.id}"
   profile        = "${var.profile_name}"
-  resource_group = "${data.ibm_resource_group.group.id}"
+  //resource_group = "${data.ibm_resource_group.group.id}"
 
   primary_network_interface = {
     subnet          = "${ibm_is_subnet.frontend_subnet.id}"
@@ -136,7 +136,7 @@ resource "tls_private_key" "frontend_keypair" {
 resource "ibm_is_floating_ip" "frontend_fip" {
   name           = "${var.basename}-frontend-fip"
   target         = "${ibm_is_instance.frontend_vsi.primary_network_interface.0.id}"
-  resource_group = "${data.ibm_resource_group.group.id}"
+  //resource_group = "${data.ibm_resource_group.group.id}"
 }
 
 resource "null_resource" "provisioners" {

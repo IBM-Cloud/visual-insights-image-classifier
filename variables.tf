@@ -10,10 +10,10 @@ variable "visual_insights_model_api_url" {
   description = "The API URL of backend Visual Insights "
 }
 
-variable "resource_group_name" {
+/*variable "resource_group_name" {
   description = "Name of the resource group to provision the resources. For resource group name, Run this command - ibmcloud resource groups"
   default = "Default"
-}
+}*/
 
 variable "ibmcloud_timeout" {
   description = "Timeout for API operations in seconds."
@@ -27,12 +27,12 @@ variable "region" {
 
 variable "zone" {
   description = "Should be same as the Visual Insights zone"
-  default = "us-south-1"
+  default = "us-south-2"
 }
 
 variable "basename" {
   description = "prefix for all the VPC resources created for frontend web app"
-  default     = "visual-insights-ui"
+  default     = "ibm-visual-insights-ui"
 }
 
 variable "image_name" {
