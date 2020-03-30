@@ -6,4 +6,4 @@ Using the Terraform template in this repository provision a dedicated backend vi
 
 # License
 
-See License.txt for license information.
+See [License.txt](License.txt) for license information.
