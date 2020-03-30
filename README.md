@@ -1,3 +1,3 @@
-# Code sample for PowerAI Vision Trial tutorial
+# Code sample for Visual Insights tutorial
 
 > :warning: Work in Progress
