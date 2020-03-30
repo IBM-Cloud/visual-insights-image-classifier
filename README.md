@@ -2,8 +2,13 @@
 
 Using the Terraform template in this repository provision a dedicated backend virtual server instance (VSI) of IBM Visual Insights (previously PowerAI Vision) in IBM Cloud Virtual Private Cloud(VPC) through IBM Cloud Schematics. Once provisioned, you will upload an image data set, train, deploy, and test an optimized deep learning (image classification) model through a GPU on the VSI. You will also deploy a front-end web application through IBM Cloud Schematics to a new VSI on the same IBM Cloud VPC. Once deployed, you will upload an image for classification by communicating with the backend deployed model exposed an an API.
 
-> For step-by-step instructions, refer this tutorial - Computer Vision with Visual Insights and Schematics
+![](images/architecture_diagram.png)
 
-# License
+> For step-by-step instructions, refer this tutorial - [Computer Vision with Visual Insights and Schematics](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-computer-vision-visual-insights-schematics)
+
+## Solution Tutorials
+For other solution tutorials, [click here](http://ibm.biz/solution-tutorials)
+
+## License
 
 See [License.txt](License.txt) for license information.
