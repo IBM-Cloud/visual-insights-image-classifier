@@ -32,7 +32,7 @@ variable "zone" {
 
 variable "basename" {
   description = "prefix for all the VPC resources created for frontend web app"
-  default     = "ibm-visual-insights-ui"
+  default     = "ibm-visual-insights-web"
 }
 
 variable "image_name" {
