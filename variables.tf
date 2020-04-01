@@ -3,7 +3,7 @@ variable "ibmcloud_api_key" {
 }
 
 variable "vpc_id" {
-  description = "Target VPC gen 2 with this command - ibmcloud is target --gen 2 and retrieve the VPC ID - ibmcloud is vpcs"
+  description = "Check the Schematics output of Visual Insights backend"
 }
 
 variable "visual_insights_model_api_url" {
