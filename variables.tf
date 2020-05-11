@@ -22,12 +22,12 @@ variable "ibmcloud_timeout" {
 
 variable "region" {
   description = "Should be same as the Visual Insights region"
-  default = "us-south"
+  default     = "us-south"
 }
 
 variable "zone" {
   description = "Should be same as the Visual Insights zone"
-  default = "us-south-2"
+  default     = "us-south-2"
 }
 
 variable "basename" {
@@ -37,10 +37,11 @@ variable "basename" {
 
 variable "image_name" {
   description = "Name of the base image for the virtual server (should be an Ubuntu 18.04 base)"
-  default = "ibm-ubuntu-18-04-1-minimal-amd64-1"
+  default     = "ibm-ubuntu-18-04-1-minimal-amd64-1"
 }
 
 variable "profile_name" {
   description = "Name of the instance profile"
-  default = "cx2-2x4"
+  default     = "cx2-2x4"
 }
+
